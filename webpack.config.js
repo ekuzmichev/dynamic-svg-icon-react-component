@@ -23,6 +23,11 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: [{ loader: "@svgr/webpack", options: { exportType: "named" } }],
+      },
     ],
   },
   devtool: prod ? undefined : "source-map",
