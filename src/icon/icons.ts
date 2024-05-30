@@ -1,9 +1,18 @@
-import { ReactComponent as Add } from "./assets/add.svg";
-import { ReactComponent as AddressBook } from "./assets/address-book.svg";
-import { ReactComponent as AlarmClock } from "./assets/alarm-clock.svg";
+import { lazy } from "react";
+
+type SvgModule = typeof import("*.svg");
+
+function loadLazily(loadFn: () => Promise<SvgModule>) {
+  return lazy(async () => {
+    const module: SvgModule = await loadFn();
+    return { default: module.ReactComponent };
+  });
+}
 
 export const icons = {
-  Add,
-  AddressBook,
-  AlarmClock,
+  Add: loadLazily(async () => import("./assets/add.svg")),
+  AddressBook: loadLazily(async () => import("./assets/address-book.svg")),
+  AlarmClock: loadLazily(async () => import("./assets/alarm-clock.svg")),
 };
+
+export type IconName = keyof typeof icons;

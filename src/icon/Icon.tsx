@@ -1,28 +1,19 @@
-import type { HTMLAttributes } from "react";
-import { createElement } from "react";
+import { CSSProperties, HTMLAttributes, Suspense, useMemo } from "react";
 
 import React from "react";
-import { IconName } from "./IconName";
-import { icons } from "./icons";
-
-// Props can vary from project to project, some will require to have some specific variant passed for styling,
-// others will extend base css classes with custom prop class etc
+import { IconName, icons } from "./icons";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   icon: IconName;
   className?: string;
-  // These props make styling component easier than creating new classes
-  rotate?: number;
+  color?: CSSProperties["color"];
 }
 
-/**
- *
- * @param icon string key icon name
- * @param className string classes for styling
- * @param rotate optional number rotation of the icon
- * @returns Icon react component
- */
-export const Icon = ({ icon, className, rotate, ...rest }: Props) => {
+export const Icon = ({ icon, className, color, ...rest }: Props) => {
+  const SvgIcon = useMemo(() => icons[icon], [icon]);
+
+  if (!SvgIcon) return null;
+
   return (
     <div
       className={className}
@@ -32,13 +23,13 @@ export const Icon = ({ icon, className, rotate, ...rest }: Props) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        transform: rotate ? `rotate(${rotate}deg)` : undefined,
+        color: `${color}`,
       }}
       {...rest}
     >
-      {createElement(icons[icon], {
-        style: { width: "100%", height: "100%" },
-      })}
+      <Suspense fallback={null}>
+        <SvgIcon />
+      </Suspense>
     </div>
   );
 };
