@@ -1,18 +1,39 @@
 import React, { FC } from "react";
 import "./App.css";
-import { ReactComponent as AlignRightIcon } from "./assets/add-solid.svg";
+import { ReactComponent as AlignRightIcon } from "./assets/align-left.svg";
+import { ReactComponent as AlignCenterIcon } from "./assets/align-center.svg";
+import { ReactComponent as AlignJustifyIcon } from "./assets/align-justify.svg";
 import { AddIcon } from "./individual-icon-components/AddIcon";
+import { Icon } from "./icon/Icon";
+import { AddressBookIcon } from "./individual-icon-components/AddressBookIcon";
+import { AlarmClockIcon } from "./individual-icon-components/AlarmClockIcon";
 
 export const App: FC = () => {
   return (
-    <div className="iconExamples">
-      <div className="iconExample">
+    <div className="container">
+      <div className="example">
         <p>Manual component with SVG code inside:</p>
-        <AddIcon />
+        <div className="icons-container">
+          <AddIcon />
+          <AddressBookIcon />
+          <AlarmClockIcon />
+        </div>
       </div>
-      <div className="iconExample">
+      <div className="example">
         <p>Imported as ReactComponent from assets:</p>
-        <AlignRightIcon />
+        <div className="icons-container">
+          <AlignRightIcon />
+          <AlignCenterIcon />
+          <AlignJustifyIcon />
+        </div>
+      </div>
+      <div className="example">
+        <p>Dynamic SVG Icon component:</p>
+        <div className="icons-container">
+          <Icon icon="AlarmClock" />
+          <Icon icon="AddressBook" />
+          <Icon icon="Add" />
+        </div>
       </div>
     </div>
   );
