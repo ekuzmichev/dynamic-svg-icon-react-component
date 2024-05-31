@@ -1,15 +1,20 @@
-import { CSSProperties, HTMLAttributes, Suspense, useMemo } from "react";
+import { CSSProperties, FC, HTMLAttributes, Suspense, useMemo } from "react";
 
 import React from "react";
 import { IconName, icons } from "./icons";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface IconProps extends HTMLAttributes<HTMLDivElement> {
   icon: IconName;
   className?: string;
   color?: CSSProperties["color"];
 }
 
-export const Icon = ({ icon, className, color, ...rest }: Props) => {
+export const Icon: FC<IconProps> = ({
+  icon,
+  className,
+  color,
+  ...restProps
+}: IconProps) => {
   const SvgIcon = useMemo(() => icons[icon], [icon]);
 
   if (!SvgIcon) return null;
@@ -25,7 +30,7 @@ export const Icon = ({ icon, className, color, ...rest }: Props) => {
         alignItems: "center",
         color: `${color}`,
       }}
-      {...rest}
+      {...restProps}
     >
       <Suspense fallback={null}>
         <SvgIcon />
