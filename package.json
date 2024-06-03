@@ -1,7 +1,7 @@
 {
-  "name": "dynamic-svg-icon-react-component",
+  "name": "dynamic-svg-icon-react-component-webpack",
   "version": "1.0.0",
-  "description": "",
+  "description": "Dynamic SVG icon React component using Webpack",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --port 3000",
