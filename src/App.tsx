@@ -30,9 +30,9 @@ export const App: FC = () => {
       <div className="example">
         <p>Dynamic SVG Icon component:</p>
         <div className="icons-container">
-          <Icon icon="AlarmClock" />
-          <Icon icon="AddressBook" />
-          <Icon icon="Add" />
+          <Icon name="AlarmClock" />
+          <Icon name="AddressBook" />
+          <Icon name="Add" />
         </div>
       </div>
     </div>
